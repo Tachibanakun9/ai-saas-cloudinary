@@ -11,6 +11,12 @@ const isPublicApiRoute = createRouteMatcher([
     "/api/videos"
 ])
 
+const isAdminRoute = createRouteMatcher([
+    "/admin"
+])
+
+
+
 
 export default clerkMiddleware((auth, req) => {
     const {userId} = auth();
@@ -34,6 +40,45 @@ export default clerkMiddleware((auth, req) => {
             return NextResponse.redirect(new URL("/sign-in", req.url))
         }
     }
+{/*
+    // If the user is accessing the admin route
+    if (isAdminRoute(req)) {
+        // Check if the user has the required role to access the admin route
+        const userRole = sessionClaims?.role; // Assuming role is stored in sessionClaims
+
+        if (userRole !== 'admin') {
+            // Redirect non-admin users to home page
+            return NextResponse.redirect(new URL("/home", req.url));
+        }
+    }
+*/}
+
+
+{/*
+
+    // If the user is accessing the admin route
+    if (isAdminRoute(req)) {
+        // Check if the user has the required role to access the admin route
+        const userRole = sessionClaims?.customClaims?.role;
+        
+
+        if (userRole !== 'admin') {
+            // Redirect non-admin users to the home page
+            return NextResponse.redirect(new URL("/home", req.url));
+        }
+    }
+
+
+
+*/}
+
+
+
+
+
+
+
+
     return NextResponse.next()
 
 })

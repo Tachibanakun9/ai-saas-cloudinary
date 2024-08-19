@@ -24,8 +24,12 @@ export async function POST(request: NextRequest) {
 
 
     try {
+        const UserID = auth()
+        if(!UserID) {
+            return NextResponse.json({error: "Unotherized access"}, {status:400})
+        }
 
-        //todo to check user
+        //todo to check user : done upside 
 
     if(
         !process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ||
